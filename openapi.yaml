@@ -1,0 +1,51 @@
+openapi: 3.0.3
+info:
+  title: Sample API
+  version: 1.0.0
+  description: WSO2 to Tyk migration example
+tags:
+  - name: "pizza"
+x-wso2-basePath: /sample
+x-wso2-production-endpoints:
+  urls:
+    - https://api.example.com/v1
+x-wso2-sandbox-endpoints:
+  urls:
+    - https://sandbox.api.example.com/v1
+x-wso2-cors:
+  corsConfigurationEnabled: true
+  accessControlAllowOrigins:
+    - "*"
+  accessControlAllowMethods:
+    - GET
+    - POST
+  accessControlAllowHeaders:
+    - Authorization
+    - Content-Type
+x-wso2-throttling-tier: Unlimited
+x-wso2-auth-header: "X-My-Auth"
+x-wso2-api-key-header: "ApiKey"
+x-wso2-transports: [ "https" ]
+x-wso2-mutual-ssl: false
+x-wso2-response-cache:
+  enabled: true
+  cacheTimeoutInSeconds: 120
+paths:
+  /items:
+    get:
+      summary: Retrieve items
+      operationId: getItems
+      responses:
+        '200':
+          description: A list of items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
